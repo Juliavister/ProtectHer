@@ -1,0 +1,32 @@
+#map { height: 300px; }
+
+
+/* Add your styles to make the button prettier */
+/* Center the button horizontally and vertically */
+.share-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.share-button:hover {
+    background-color: #2980b9;
+}
+
+.danger-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background-color: darkred;
+}
+
