@@ -1,5 +1,6 @@
 // script.js
 
+
 let longitude;
 let latitude;
 let watchId; // Declare watchId outside the event listeners
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
+
         stopShareLocationButton.addEventListener('click', function () {
             navigator.geolocation.clearWatch(watchId);
             latitude = null;
@@ -41,23 +43,49 @@ document.addEventListener("DOMContentLoaded", function () {
             marker = null;
             alert('You have stopped sharing your location')
         });
+
         var addingDangerZone = false;
-
         addDangerZoneButton.addEventListener('click', function () {
-            var popup = L.popup();
-            var circle;
-            function onMapClick(e) {
-                circle = L.circle(e.latlng, {
-                    color: 'red',
-                    fillColor: '#f03',
-                    fillOpacity: 0.5,
-                    radius: 500
-                }).addTo(map);
+            if (!addingDangerZone) {
+                Swal.fire({
+                    title: 'Add Danger Zone',
+                    html:
+                        '<input id="swal-input-title" class="swal2-input" placeholder="Title">' +
+                        '<input id="swal-input-description" class="swal2-input" placeholder="Description">',
+                    showCancelButton: true,
+                    confirmButtonText: 'Add',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        const title = document.getElementById('swal-input-title').value;
+                        const description = document.getElementById('swal-input-description').value;
+                        return [title, description];
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const [title, description] = result.value;
+                        // Use the title and description as needed
+                        console.log('Title:', title);
+                        console.log('Description:', description);
+                        addingDangerZone = true;
+                        var circle;
+                        function onMapClick(e) {
+                            circle = L.circle(e.latlng, {
+                                color: 'red',
+                                fillColor: '#f03',
+                                fillOpacity: 0.5,
+                                radius: 500,
+                            }).addTo(map);
+                            circle.bindTooltip(title).openTooltip(); // Use the title
+                        }
+                        map.on('click', onMapClick);
+                        setTimeout(function () {
+                            addingDangerZone = false;
+                            map.off('click', onMapClick);
+                        }, 1000);
+                    }
+                });
             }
-            map.on('click', onMapClick);
-
         });
-
 
 
         // Initialize button states
