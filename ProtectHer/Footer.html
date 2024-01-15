@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your App Title</title>
+  <!-- Add any additional styles or scripts needed for your footer here -->
+</head>
+<body>
+
+<div id="footer">
+  <!-- Footer content will be dynamically rendered here -->
+</div>
+
+<script>
+  // Your JavaScript code here
+
+  const footerContainer = document.createElement('div');
+  footerContainer.style.textAlign = 'center';
+  footerContainer.style.marginTop = '10px';
+  document.getElementById('footer').appendChild(footerContainer);
+
+  const heading = document.createElement('h1');
+  heading.textContent = 'Thank you for using ProtectHer!';
+  heading.style.color = 'pink';
+  footerContainer.appendChild(heading);
+
+  const row = document.createElement('div');
+  row.style.display = 'flex';
+  row.style.justifyContent = 'space-around';
+  footerContainer.appendChild(row);
+
+  const createColumn = (title, links) => {
+    const column = document.createElement('div');
+    column.style.flex = '1';
+
+    const columnHeading = document.createElement('h2');
+    columnHeading.textContent = title;
+    column.appendChild(columnHeading);
+
+    links.forEach(link => {
+      const footerLink = document.createElement('a');
+      footerLink.href = link.href;
+      footerLink.textContent = link.text;
+      column.appendChild(footerLink);
+    });
+
+    row.appendChild(column);
+  };
+
+  createColumn('About us', [
+    { href: '#', text: 'Aim' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Services', [
+    { href: 'https://www.linkedin.com/company/creatialabs/', text: 'CREATI·A Labs' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Contact Us', [
+    { href: 'https://www.linkedin.com/in/julia-vister-a6756b22b/', text: 'Julia Vister' },
+    { href: 'https://www.linkedin.com/in/doga-kurtoglu/', text: 'Doga Kurtoglu' },
+    { href: 'https://www.linkedin.com/in/mpienkosz/', text: 'Mikolaj Pienkosz' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Social Media', [
+    { href: 'https://twitter.com/creatiaresearch', text: 'Twitter' },
+    { href: 'https://www.linkedin.com/company/creatialabs/', text: 'Linkedin' },
+    // Add other social media links as needed
+  ]);
+</script>
+
+</body>
+</html>

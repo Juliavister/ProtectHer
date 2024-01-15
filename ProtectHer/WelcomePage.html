@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="FooterStyle.css">
+
+
+</head>
+
+<body>
+
+<div class="welcome-container">
+  <div class="welcome-content">
+    <h1>Welcome to ProtectHer</h1>
+    <p>
+      This is an application only for women who ever feel unsafe wherever
+      they are. With this app you can safely share your location with other
+      women in the area if you feel unsafe and want someone to watch over
+      you. You can also use an interactive map to see danger-zones in your
+      area created by other users.
+    </p>
+  </div>
+  <div class="welcome-buttons">
+    <button class="custom-button" onclick="handleStartButtonClick()">
+      Start
+    </button>
+    <button class="custom-button" onclick="handleStartButtonClick()">
+      Register
+    </button>
+    <button class="custom-button" onclick="handleMapButtonClick()">
+      Use Interactive Map
+    </button>
+  </div>
+</div>
+
+<div id="footer">
+  <!-- Footer content will be dynamically rendered here -->
+</div>
+
+<script>
+  const footerContainer = document.createElement('div');
+  footerContainer.id = 'footer-container';
+  document.getElementById('footer').appendChild(footerContainer);
+
+  const heading = document.createElement('h1');
+  heading.textContent = 'Thank you for using ProtectHer!';
+  heading.className = 'heading';
+  footerContainer.appendChild(heading);
+
+  const row = document.createElement('div');
+  row.className = 'row';
+  footerContainer.appendChild(row);
+
+  const createColumn = (title, links) => {
+    const column = document.createElement('div');
+    column.className = 'column';
+
+    const columnHeading = document.createElement('h2');
+    columnHeading.textContent = title;
+    column.appendChild(columnHeading);
+
+    const linksContainer = document.createElement('div');
+    linksContainer.className = 'links-container'; // Add a class for styling
+    column.appendChild(linksContainer);
+
+    links.forEach(link => {
+      const footerLink = document.createElement('a');
+      footerLink.href = link.href;
+      footerLink.textContent = link.text;
+      footerLink.className = 'footer-link';
+      linksContainer.appendChild(footerLink);
+    });
+
+    row.appendChild(column);
+  };
+
+
+  createColumn('About us', [
+    { href: '#', text: 'Aim' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Services', [
+    { href: 'https://www.linkedin.com/company/creatialabs/', text: 'CREATI·A Labs' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Contact Us', [
+    { href: 'https://www.linkedin.com/in/julia-vister-a6756b22b/', text: 'Julia Vister' },
+    { href: 'https://www.linkedin.com/in/doga-kurtoglu/', text: 'Doga Kurtoglu' },
+    { href: 'https://www.linkedin.com/in/mpienkosz/', text: 'Mikolaj Pienkosz' },
+    // Add other links as needed
+  ]);
+
+  createColumn('Social Media', [
+    { href: 'https://twitter.com/creatiaresearch', text: 'Twitter' },
+    { href: 'https://www.linkedin.com/company/creatialabs/', text: 'Linkedin' },
+    // Add other social media links as needed
+  ]);
+</script>
+
+<script>
+
+  const handleMapButtonClick = () => {
+    window.location.href = "https://protecther-93ff0.web.app/";
+  };
+
+  const handleStartButtonClick = () => {
+    window.location.href = "https://juliavister.github.io/ProtectHer_Login-Reg/";
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add("body-welcome");
+  });
+
+  window.addEventListener('beforeunload', () => {
+    document.body.classList.remove("body-welcome");
+  });
+</script>
+</body>
+</html>

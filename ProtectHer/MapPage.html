@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="/Users/juliavister/my-react-app/src/Custom.css">
+</head>
+<body>
+<div class="welcome-container">
+  <div class="welcome-content">
+    <h1>Welcome to ProtectHer</h1>
+    <p>
+      This is an application only for women who ever feel unsafe wherever
+      they are. With this app you can safely share your location with other
+      women in the area if you feel unsafe and want someone to watch over
+      you. You can also use an interactive map to see danger-zones in your
+      area created by other users.
+    </p>
+  </div>
+  <div class="welcome-buttons">
+    <button class="custom-button" onclick="handleStartButtonClick()">
+      Start
+    </button>
+    <button class="custom-button" onclick="handleStartButtonClick()">
+      Register
+    </button>
+    <button class="custom-button" onclick="handleMapButtonClick()">
+      Use Interactive Map
+    </button>
+  </div>
+</div>
+
+<script>
+  // Your JavaScript code here
+
+  const handleMapButtonClick = () => {
+    window.location.href = "https://protecther-93ff0.web.app/";
+  };
+
+  const handleStartButtonClick = () => {
+    window.location.href = "https://juliavister.github.io/ProtectHer_Login-Reg/";
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add("body-welcome");
+  });
+
+  window.addEventListener('beforeunload', () => {
+    document.body.classList.remove("body-welcome");
+  });
+</script>
+</body>
+</html>

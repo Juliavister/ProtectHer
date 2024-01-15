@@ -1,0 +1,86 @@
+/* custom.css */
+
+.body-welcome{
+    /*background-image: url('/Users/juliavister/my-react-app/public/women_linedrawing.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;   */
+    background: linear-gradient(to right, #eeaeca , #c194e9);
+}
+.custom-button {
+    background-color: #FFB6C1; /* Your desired background color */
+    color: #0c0c0c; /* Text color */
+    border: none; /* Remove the default button border */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add rounded corners */
+    margin-bottom: 10px;
+}
+
+.custom-button:hover {
+    background-color:  #F08080; /* Change color on hover */
+}
+
+.back-button{
+    background-color: #FFB6C1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    left: 100px;
+    top: 150px;
+
+}
+.back-button:hover {
+    background-color:  #F08080;
+}
+
+.welcome-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.welcome-content{
+    /*background-color: #fff; */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    border-radius: 20px;
+    max-width: 600px;
+    word-wrap: break-word;
+
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: linear-gradient(to right, #FFC2C2, #FFD7A8);
+}
+
+.map-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+

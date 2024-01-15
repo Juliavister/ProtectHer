@@ -1,0 +1,64 @@
+/* Reset some default styles */
+body, h1, h2, p, a {
+margin: 0;
+padding: 0;
+}
+
+/* Your global styles or other styles can go here */
+
+/* Box component */
+#footer {
+padding: 5% 0;
+width: 100%;
+background: black;
+bottom: 0;
+}
+
+/* FooterContainer component */
+#footer-container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+/* Column component */
+.column {
+display: flex;
+flex-direction: column;
+text-align: left;
+margin-left: 60px;
+}
+
+/* Row component */
+.row {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+grid-gap: 20px;
+
+@media (max-width: 1000px) {
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+}
+
+/* FooterLink component */
+.footer-link {
+color: #fff;
+margin-bottom: 20px;
+font-size: 18px;
+text-decoration: none;
+}
+
+.footer-link:hover {
+color: green;
+transition: 200ms ease-in;
+}
+
+/* Heading component */
+.heading {
+font-size: 24px;
+color: #fff;
+margin-bottom: 40px;
+font-weight: bold;
+}

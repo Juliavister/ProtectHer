@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-Time User Locations</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+</head>
+<body>
+<div id="map" style="height: 500px;"></div>
+<script>
+  // Retrieve the JWT token from session storage
+  var jwtToken = sessionStorage.getItem('token');
+
+  // Initialize the map centered on Warsaw
+  var map = L.map('map').setView([52.2297, 21.0122], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Connect to the WebSocket server
+  var socket = new SockJS('192.168.18.8:8080/ws');
+  var stompClient = Stomp.over(socket);
+  stompClient.connect({}, function(frame) {
+    // Subscribe to the location topic
+    stompClient.subscribe('192.168.18.8:8080/topic/location', function(message) {
+      // Update the map with the new location
+      var location = JSON.parse(message.body);
+      L.marker([location.latitude, location.longitude]).addTo(map);
+    });
+  });
+
+  navigator.geolocation.watchPosition(function(position) {
+    var location = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    };
+
+    // Send the location update to the server
+    fetch('192.168.18.8:8080/api/update-location', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwtToken
+      },
+      body: JSON.stringify(location)
+    });
+  }, function(error) {
+    console.error("Error getting location: ", error);
+  }, {
+    enableHighAccuracy: true,
+    maximumAge: 0
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your App Title</title>
+  <link rel="stylesheet" href="/custom.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- Your content will be dynamically rendered here -->
+</div>
+
+<script>
+  // Your JavaScript code here
+
+  const history = ['welcome'];
+  let currentPage = 'welcome';
+
+  const handleNavigation = (page) => {
+    setCurrentPage(page);
+    setHistory((prevHistory) => [...prevHistory, page]);
+  };
+
+  const handleBack = () => {
+    const previousPage = history[history.length - 2];
+    if (previousPage) {
+      setCurrentPage(previousPage);
+      setHistory((prevHistory) => prevHistory.slice(0, -1));
+    }
+  };
+
+  const setCurrentPage = (page) => {
+    currentPage = page;
+    renderPage();
+  };
+
+  const setHistory = (newHistory) => {
+    history = newHistory;
+  };
+
+  const renderPage = () => {
+    const appContainer = document.getElementById('app');
+    appContainer.innerHTML = ''; // Clear the current content
+
+    if (currentPage !== 'welcome') {
+      const backButton = document.createElement('button');
+      backButton.className = 'back-button';
+      backButton.textContent = 'Back';
+      backButton.addEventListener('click', handleBack);
+      appContainer.appendChild(backButton);
+    }
+
+    if (currentPage === 'welcome') {
+      loadPageContent('WelcomePage.html');
+    } else if (currentPage === 'login') {
+      loadPageContent('Login.html');
+    } else if (currentPage === 'map') {
+      loadPageContent('MapPage.html');
+    }
+
+    const footer = document.createElement('div');
+    footer.style.minHeight = '400px';
+    footer.style.color = 'pink';
+    footer.textContent = 'Your footer content';
+    appContainer.appendChild(footer);
+  };
+
+  const loadPageContent = (pageName) => {
+    fetch(pageName)
+            .then(response => response.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const newContent = parser.parseFromString(html, 'text/html');
+              const bodyContent = newContent.body.innerHTML;
+              document.getElementById('app').innerHTML = bodyContent;
+            })
+            .catch(error => console.error('Error loading page content:', error));
+  };
+
+  // Initial rendering
+  renderPage();
+
+  // Example of navigating to another page
+  // handleNavigation('login');
+</script>
+
+</body>
+</html>
